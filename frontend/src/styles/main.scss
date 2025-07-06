@@ -1,0 +1,388 @@
+@use "sass:color";
+
+// Подключение шрифта Geist
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/fonts/geist/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Основные переменные
+$primary-color: #FFFFFF !default;
+$secondary-color: #FFFFFF !default;
+$accent-color: #FFFFFF !default;
+$background-color: #000000 !default;
+$card-background: #111111 !default;
+$yellow-color: #FFD700 !default;
+$font-family: 'GeistSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !default;
+
+// Миксины
+@mixin glass-card {
+  background: $card-background;
+  border: 1px solid $primary-color;
+  box-shadow: $card-shadow;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px color.change($background-color, $alpha: 0.25);
+  }
+}
+
+// Градиенты и тени
+$primary-gradient: linear-gradient(180deg, #000000 0%, #111111 100%) !default;
+$secondary-gradient: linear-gradient(180deg, #111111 0%, #222222 100%) !default;
+$accent-gradient: linear-gradient(180deg, #222222 0%, #333333 100%) !default;
+$card-shadow: 0 8px 30px color.change($background-color, $alpha: 0.2) !default;
+
+// Общие стили
+body {
+  background: $primary-gradient;
+  color: $primary-color;
+  overflow-x: hidden;
+  height: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+// Глобальные стили для шрифтов
+html {
+  font-family: $font-family;
+}
+
+// Глобальное применение шрифта
+* {
+  font-family: $font-family;
+}
+
+// Глобальные стили для исправления горизонтальной прокрутки
+.v-application {
+  overflow-x: hidden;
+  max-width: 100vw;
+  font-family: $font-family !important;
+}
+
+.v-container, .v-row, .v-col, .v-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.glass-card {
+  background: #222222;
+  border: none;
+  padding: 20px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: color.adjust(#222222, $lightness: 5%);
+  }
+}
+
+.card-base {
+  background: #222222 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.progress-card {
+  background: #222222;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.qr-demo {
+  text-align: center;
+  padding: 20px;
+  border: none;
+  background: #222222;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: color.adjust(#222222, $lightness: 5%);
+  }
+}
+
+.activate-button {
+  background: $yellow-color !important;
+  color: black !important;
+  font-weight: 600;
+  height: 56px !important;
+  font-size: 16px;
+  text-transform: none;
+  letter-spacing: normal;
+  
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+.qr-card {
+  @extend .card-base;
+  padding: 32px;
+}
+
+.qr-wrapper {
+  background: white;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 0;
+}
+
+.gradient-text {
+  color: $primary-color;
+  font-weight: bold;
+}
+
+.stat-card {
+  background: #222222;
+  color: $primary-color;
+  border: none;
+  padding: 24px;
+  height: 100%;
+  
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+}
+
+.progress-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.action-button {
+  background: linear-gradient(45deg, $accent-color, color.adjust($accent-color, $lightness: 10%));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba($accent-color, 0.3);
+  }
+  
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Специальный стиль для кнопки активации купона
+.activate-voucher {
+  background: linear-gradient(45deg, #e53935, #f44336) !important; /* Красный градиент */
+  color: white !important;
+  border-radius: 0 !important;
+  min-width: 130px;
+  max-width: 100%;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0 12px;
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  @media (max-width: 450px) {
+    min-width: auto;
+    padding: 0 8px;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.5);
+    background: linear-gradient(45deg, #d32f2f, #e53935) !important; /* Более темный красный при наведении */
+  }
+}
+
+// Анимации
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+// Дополнительные стили
+.text-accent {
+  color: $accent-color;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+// QR-код стили
+.qr-container {
+  background: #222222;
+  border: none;
+  border-radius: 0;
+  padding: 24px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: color.adjust(#222222, $lightness: 5%);
+    transform: scale(1.02);
+  }
+
+  .qr-icon {
+    color: $primary-color;
+    filter: drop-shadow(0 0 8px color.change($primary-color, $alpha: 0.3));
+  }
+
+  .qr-title {
+    color: $primary-color;
+    font-weight: 600;
+    text-shadow: 0 0 10px color.change($primary-color, $alpha: 0.2);
+  }
+
+  .qr-description {
+    color: color.change($primary-color, $alpha: 0.7);
+  }
+}
+
+// Кастомные стили для Vuetify компонентов
+.v-btn {
+  &.v-btn--variant-text {
+    color: $primary-color;
+  }
+  border-radius: 0 !important;
+}
+
+.v-progress-linear {
+  background: rgba(255, 255, 255, 0.1);
+  
+  .v-progress-linear__determinate {
+    background: $accent-color;
+  }
+}
+
+.v-bottom-navigation {
+  background: $card-background !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  .v-btn {
+    color: $primary-color !important;
+  }
+}
+
+// Глобальная переменная для высоты нижней панели навигации
+:root {
+  --bottom-nav-height: 56px;
+}
+
+// Добавляем стили для правильного скроллинга
+html, body {
+  overflow-x: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+// Фиксируем визуальный баг viewport на мобильных устройствах
+@media (max-width: 768px) {
+  .v-application, #app {
+    height: 100%;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+// Скрываем нижнюю панель навигации, когда показана клавиатура
+@media (max-height: 450px) {
+  .bottom-nav, .navigation-wrapper {
+    display: none !important;
+  }
+}
+
+// Добавляем стили для правильного скроллинга с фиксированной панелью
+.v-application {
+  overflow-y: auto;
+  position: relative;
+  
+  .v-main__wrap {
+    min-height: 100%;
+  }
+}
+
+// Стили для контейнеров на страницах с нижней навигацией
+.fill-height {
+  padding-bottom: 70px !important; /* Добавляем отступ для предотвращения перекрытия контента нижней панелью */
+}
+
+// Стили для безопасного позиционирования элементов над нижней панелью
+.safe-bottom-padding {
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+// Стиль для кнопки закрытия модального окна
+.close-button {
+  min-width: 120px;
+  font-weight: 500;
+  border-radius: 0 !important;
+  border: none !important;
+  outline: none !important;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  background: linear-gradient(45deg, #e53935, #f44336) !important;
+  color: white !important;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.5);
+    background: linear-gradient(45deg, #d32f2f, #e53935) !important;
+  }
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// Глобальные стили для компонентов Vuetify - убираем все скругления
+.v-card {
+  border-radius: 0 !important;
+}
+
+.v-dialog .v-overlay__content {
+  border-radius: 0 !important;
+}
+
+.v-sheet {
+  border-radius: 0 !important;
+}
+
+.v-menu .v-overlay__content {
+  border-radius: 0 !important;
+} 

@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from app.dao.database import Base   # Убедитесь, что Base создан через declarative_base()
+from app.dao.database import Base  
 import json
 
 class User(Base):
